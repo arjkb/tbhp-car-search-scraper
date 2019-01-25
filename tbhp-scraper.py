@@ -1,6 +1,11 @@
 from bs4 import BeautifulSoup
 import requests
 
+def search(carname, reviews):
+    for k in reviews:
+        if carname in k.lower():
+            print(k, reviews[k])
+
 def main():
     r = requests.get('https://www.team-bhp.com/forum/official-new-car-reviews/')
     # TODO: ensure status code is 200
@@ -37,7 +42,9 @@ def main():
                 counter += 1
                 print(counter, link.text, link.get('href'))
                 review[link.text] = link.get('href')
-    print(review)
+
+    
+    search("mercedes", review)
 
 if __name__ == "__main__":
     main()
